@@ -9,10 +9,12 @@ namespace azure_functions_example.Configurations
         public AppSettings()
             : base()
         {
-            this.OpenApi = this.Config.Get<OpenApiSettings>("OpenApi");
+            OpenApi = Config.Get<OpenApiSettings>("OpenApi");
+            MongoDbConnectionString = Config.GetValue<string>("MongoDbConnectionString");
         }
 
         public virtual OpenApiSettings OpenApi { get; set; }
+        public string MongoDbConnectionString { get; set; }
     }
 
     public class OpenApiSettings

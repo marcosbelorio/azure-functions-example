@@ -28,8 +28,9 @@ namespace azure_functions_example
             services.AddSingleton<AppSettings>();
             services.AddTransient<IDummyHttpService, DummyHttpService>();
 
-            services.AddFunctionHealthChecks()
-                .AddMongoDb("mongodb://root:MongoDB2021!@localhost:27017");
+            var appSettings = services.BuildServiceProvider().GetRequiredService<AppSettings>();
+
+            services.AddFunctionHealthChecks().AddMongoDb(appSettings.MongoDbConnectionString);
         }
     }
 }
